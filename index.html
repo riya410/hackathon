@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindLinku - Your Mental Wellness Journey</title>
+    <style>
+        :root {
+            --primary-color: #0f766e;
+            --primary-light: #14b8a6;
+            --primary-dark: #134e4a;
+            --secondary-color: #f0fdfa;
+            --accent-color: #06b6d4;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --success-color: #10b981;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/><circle cx="900" cy="800" r="80" fill="url(%23a)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            color: var(--primary-color);
+            padding: 1.25rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button::after {
+            content: '→';
+            margin-left: 0.75rem;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .login-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            margin: 2rem;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .login-form {
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+        }
+
+        .login-button {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .login-button:hover {
+            background: var(--primary-dark);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .signup-link {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        /* Assessment Container */
+        .assessment-container {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #e6fffa 100%);
+            padding: 120px 2rem 4rem;
+        }
+
+        .assessment-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .progress-section {
+            margin-bottom: 3rem;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .step-indicator {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .progress-percentage {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(15, 118, 110, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            border-radius: 50px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .assessment-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .step-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-select, .form-textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Question Styles */
+        .question-container {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .option-card {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: var(--primary-light);
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            border-color: var(--primary-color);
+            background: var(--secondary-color);
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
+        }
+
+        .option-radio {
+            margin-right: 1rem;
+            accent-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .option-text {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Checkbox Grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-card {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-card:hover {
+            border-color: var(--primary-light);
+            background: var(--secondary-color);
+        }
+
+        .checkbox-card.selected {
+            border-color: var(--primary-color);
+            background: var(--secondary-color);
+        }
+
+        .checkbox-input {
+            margin-right: 0.75rem;
+            accent-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Form Buttons */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Results Section */
+        .results-container {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #e6fffa 100%);
+            padding: 120px 2rem 4rem;
+        }
+
+        .results-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .results-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .results-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Score Cards */
+        .scores-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .score-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .score-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .score-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .score-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Severity Assessment */
+        .severity-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 4rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .severity-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .severity-mild { color: var(--success-color); }
+        .severity-moderate { color: var(--warning-color); }
+        .severity-severe { color: var(--danger-color); }
+
+        .severity-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Top Concerns */
+        .concerns-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .concerns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .concern-item {
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .concern-item:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .concern-rank {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .concern-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .concern-percentage {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Therapist Cards */
+        .therapists-section {
+            margin-bottom: 4rem;
+        }
+
+        .therapists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .therapist-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .therapist-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        .therapist-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .therapist-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: 1.25rem;
+        }
+
+        .therapist-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .therapist-rating {
+            display: flex;
+            align-items: center;
+            color: var(--warning-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .specialties-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .specialties-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .specialty-tag {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(15, 118, 110, 0.2);
+        }
+
+        .therapist-details {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .detail-value {
+            color: var(--text-secondary);
+        }
+
+        .therapist-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-button {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .book-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .assessment-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+
+            .login-card {
+                margin: 1rem;
+                padding: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .lang-btn:not(.active) {
+            color: var(--text-secondary);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: var(--surface);
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button class="lang-btn active" onclick="setLanguage('en')" data-lang="en">EN</button>
+        <button class="lang-btn" onclick="setLanguage('ne')" data-lang="ne">नेपाली</button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">
+                <div class="logo-icon">🧠</div>
+                <span data-translate="logo">MindLinku</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#" class="login-btn" onclick="openLoginModal()" data-translate="login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero-section">
+        <div class="hero-content">
+            
+            <h1 class="hero-title">
+                <span data-translate="hero-title-1">Your Mental Wellness</span><br>
+                <span data-translate="hero-title-2">Journey Starts Here</span>
+            </h1>
+            <p class="hero-subtitle" data-translate="hero-subtitle">
+                Connect with qualified Nepali therapists through our comprehensive assessment. 
+                Get personalized recommendations based on your unique needs and cultural background.
+            </p>
+            <button class="cta-button" onclick="openLoginModal()">
+                <span data-translate="cta-button">Begin Your Assessment</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="login-modal">
+        <div class="login-card">
+            <button class="close-modal" onclick="closeLoginModal()">×</button>
+            <div class="login-header">
+                <h2 class="login-title" data-translate="login-title">Welcome Back</h2>
+                <p class="login-subtitle" data-translate="login-subtitle">Sign in to continue your mental wellness journey</p>
+            </div>
+            <form class="login-form" id="login-form">
+                <div class="form-group">
+                    <label class="form-label" data-translate="email-label">Email Address</label>
+                    <input type="email" class="form-input" name="email" required placeholder="Enter your email" data-translate-placeholder="email-placeholder">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-translate="password-label">Password</label>
+                    <input type="password" class="form-input" name="password" required placeholder="Enter your password" data-translate-placeholder="password-placeholder">
+                </div>
+                <button type="submit" class="login-button" id="login-button">
+                    <span data-translate="login-button">Sign In</span>
+                </button>
+            </form>
+            <div class="signup-link">
+                <span data-translate="signup-text">Don't have an account?</span> 
+                <a href="#" onclick="showSignupForm()" data-translate="signup-link">Sign up here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assessment Container -->
+    <div class="assessment-container" id="assessment-container">
+        <div class="assessment-wrapper">
+            <div class="progress-section">
+                <div class="progress-header">
+                    <span class="step-indicator" id="step-indicator">Step 1 of 4</span>
+                    <span class="progress-percentage" id="progress-percentage">25% Complete</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 25%"></div>
+                </div>
+            </div>
+            
+            <div class="assessment-card">
+                <div id="step-content">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Container -->
+    <div class="results-container" id="results-container">
+        <div class="results-wrapper">
+            <div class="results-header">
+                <h1 class="results-title" data-translate="results-title">Your Personalized Assessment Results</h1>
+                <p class="results-subtitle" data-translate="results-subtitle">
+                    Based on your responses, we've analyzed your mental health profile and found the best therapist matches for you.
+                </p>
+            </div>
+            
+            <!-- Scores Section -->
+            <div class="scores-section">
+                <h2 class="section-title" data-translate="scores-title">Mental Health Assessment Scores</h2>
+                <div class="scores-grid" id="scores-grid">
+                    <!-- Scores will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Severity Assessment -->
+            <div class="severity-card" id="severity-card">
+                <!-- Severity assessment will be inserted here -->
+            </div>
+            
+            <!-- Top Concerns -->
+            <div class="concerns-card">
+                <h2 class="section-title" data-translate="concerns-title">Your Primary Areas of Focus</h2>
+                <div class="concerns-grid" id="concerns-grid">
+                    <!-- Top concerns will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Recommended Therapists -->
+            <div class="therapists-section">
+                <h2 class="section-title" data-translate="therapists-title">Recommended Therapists for You</h2>
+                <div class="therapists-grid" id="therapists-grid">
+                    <!-- Recommended therapists will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language System
+        let currentLanguage = 'en';
+        
+        const translations = {
+            en: {
+                'logo': 'MindLinku',
+                'login': 'Login',
+                'hero-badge': '✨ Trusted by 10,000+ users in Nepal',
+                'hero-title-1': 'Your Mental Wellness',
+                'hero-title-2': 'Journey Starts Here',
+                'hero-subtitle': 'Connect with qualified Nepali therapists through our comprehensive assessment. Get personalized recommendations based on your unique needs and cultural background.',
+                'cta-button': 'Begin Your Assessment',
+                'login-title': 'Welcome Back',
+                'login-subtitle': 'Sign in to continue your mental wellness journey',
+                'email-label': 'Email Address',
+                'email-placeholder': 'Enter your email',
+                'password-label': 'Password',
+                'password-placeholder': 'Enter your password',
+                'login-button': 'Sign In',
+                'signup-text': "Don't have an account?",
+                'signup-link': 'Sign up here',
+                'results-title': 'Your Personalized Assessment Results',
+                'results-subtitle': "Based on your responses, we've analyzed your mental health profile and found the best therapist matches for you.",
+                'scores-title': 'Mental Health Assessment Scores',
+                'concerns-title': 'Your Primary Areas of Focus',
+                'therapists-title': 'Recommended Therapists for You'
+            },
+            ne: {
+                'logo': 'माइन्डलिंकु',
+                'login': 'लगइन',
+                'hero-badge': '✨ नेपालमा १०,०००+ प्रयोगकर्ताहरूले भरोसा गरेको',
+                'hero-title-1': 'तपाईंको मानसिक स्वास्थ्य',
+                'hero-title-2': 'यात्रा यहाँबाट सुरु हुन्छ',
+                'hero-subtitle': 'हाम्रो व्यापक मूल्याङ्कनको माध्यमबाट योग्य नेपाली चिकित्सकहरूसँग जडान गर्नुहोस्। तपाईंको अनौठो आवश्यकता र सांस्कृतिक पृष्ठभूमिमा आधारित व्यक्तिगत सिफारिसहरू प्राप्त गर्नुहोस्।',
+                'cta-button': 'तपाईंको मूल्याङ्कन सुरु गर्नुहोस्',
+                'login-title': 'फिर्ता स्वागत छ',
+                'login-subtitle': 'तपाईंको मानसिक स्वास्थ्य यात्रा जारी राख्न साइन इन गर्नुहोस्',
+                'email-label': 'इमेल ठेगाना',
+                'email-placeholder': 'तपाईंको इमेल प्रविष्ट गर्नुहोस्',
+                'password-label': 'पासवर्ड',
+                'password-placeholder': 'तपाईंको पासवर्ड प्रविष्ट गर्नुहोस्',
+                'login-button': 'साइन इन',
+                'signup-text': 'खाता छैन?',
+                'signup-link': 'यहाँ साइन अप गर्नुहोस्',
+                'results-title': 'तपाईंको व्यक्तिगत मूल्याङ्कन परिणामहरू',
+                'results-subtitle': 'तपाईंको जवाफहरूको आधारमा, हामीले तपाईंको मानसिक स्वास्थ्य प्रोफाइलको विश्लेषण गरेका छौं र तपाईंको लागि उत्तम चिकित्सक मिलानहरू फेला पारेका छौं।',
+                'scores-title': 'मानसिक स्वास्थ्य मूल्याङ्कन स्कोरहरू',
+                'concerns-title': 'तपाईंको प्राथमिक फोकस क्षेत्रहरू',
+                'therapists-title': 'तपाईंको लागि सिफारिस गरिएका चिकित्सकहरू'
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.dataset.translatePlaceholder;
+                if (translations[lang] && translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+        }
+
+        // Application State
+        let currentStep = 0;
+        let assessmentData = {};
+        let isSubmitting = false;
+        let isLoggedIn = false;
+
+        // Assessment Steps Configuration
+        const assessmentSteps = [
+            {
+                title: "Personal Information",
+                description: "Help us understand your background and preferences for better matching.",
+                render: renderPersonalInfoStep
+            },
+            {
+                title: "Mental Health Assessment",
+                description: "A comprehensive evaluation of your current mental health status using validated screening tools.",
+                render: renderMentalHealthStep
+            },
+            {
+                title: "Therapy Preferences",
+                description: "Tell us about your therapy preferences and specific areas you'd like to focus on.",
+                render: renderPreferencesStep
+            },
+            {
+                title: "Additional Details",
+                description: "Final details to help us provide the most accurate recommendations.",
+                render: renderAdditionalStep
+            }
+        ];
+
+        // Comprehensive Mental Health Questions
+        const mentalHealthQuestions = [
+            // Depression (PHQ-9)
+            {
+                id: "depression_1",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by little interest or pleasure in doing things?"
+            },
+            {
+                id: "depression_2",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by feeling down, depressed, or hopeless?"
+            },
+            {
+                id: "depression_3",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by trouble falling or staying asleep, or sleeping too much?"
+            },
+            {
+                id: "depression_4",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by feeling tired or having little energy?"
+            },
+            {
+                id: "depression_5",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by poor appetite or overeating?"
+            },
+            {
+                id: "depression_6",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by feeling bad about yourself or that you are a failure or have let yourself or your family down?"
+            },
+            {
+                id: "depression_7",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by trouble concentrating on things, such as reading or watching television?"
+            },
+            {
+                id: "depression_8",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by moving or speaking so slowly that other people could have noticed, or being so fidgety or restless that you have been moving around a lot more than usual?"
+            },
+            {
+                id: "depression_9",
+                category: "depression",
+                text: "Over the past 2 weeks, how often have you been bothered by thoughts that you would be better off dead or of hurting yourself in some way?"
+            },
+
+            // Anxiety (GAD-7)
+            {
+                id: "anxiety_1",
+                category: "anxiety",
+                text: "Over the past 2 weeks, how often have you been bothered by feeling nervous, anxious, or on edge?"
+            },
+            {
+                id: "anxiety_2",
+                category: "anxiety",
+                text: "Over the past 2 weeks, how often have you been bothered by not being able to stop or control worrying?"
+            },
+            {
+                id: "anxiety_3",
+                category: "anxiety",
+                text: "Over the past 2 weeks, how often have you been bothered by worrying too much about different things?"
+            },
+            {
+                id: "anxiety_4",
+                category: "anxiety",
+                text: "Over the past 2 weeks, how often have you been bothered by trouble relaxing?"
+            },
+            {
+                id: "anxiety_5",
+                category: "anxiety",
+                text: "Over the past 2 weeks, how often have you been bothered by being so restless that it's hard to sit still?"
+            },
+            {
+                id: "anxiety_6",
+                category: "anxiety",
+                text: "Over the past 2 weeks, how often have you been bothered by becoming easily annoyed or irritable?"
+            },
+            {
+                id: "anxiety_7",
+                category: "anxiety",
+                text: "Over the past 2 weeks, how often have you been bothered by feeling afraid as if something awful might happen?"
+            },
+
+            // Stress Assessment
+            {
+                id: "stress_1",
+                category: "stress",
+                text: "In the past month, how often have you felt that you were unable to control the important things in your life?"
+            },
+            {
+                id: "stress_2",
+                category: "stress",
+                text: "In the past month, how often have you felt confident about your ability to handle your personal problems?"
+            },
+            {
+                id: "stress_3",
+                category: "stress",
+                text: "In the past month, how often have you felt that things were going your way?"
+            },
+            {
+                id: "stress_4",
+                category: "stress",
+                text: "In the past month, how often have you felt difficulties were piling up so high that you could not overcome them?"
+            },
+
+            // PTSD Screening
+            {
+                id: "trauma_1",
+                category: "trauma",
+                text: "In the past month, have you had nightmares about a traumatic event or thought about it when you did not want to?"
+            },
+            {
+                id: "trauma_2",
+                category: "trauma",
+                text: "In the past month, have you tried hard not to think about a traumatic event or went out of your way to avoid situations that reminded you of it?"
+            },
+            {
+                id: "trauma_3",
+                category: "trauma",
+                text: "In the past month, have you been constantly on guard, watchful, or easily startled?"
+            },
+            {
+                id: "trauma_4",
+                category: "trauma",
+                text: "In the past month, have you felt numb or detached from others, activities, or your surroundings?"
+            },
+
+            // Sleep Quality
+            {
+                id: "sleep_1",
+                category: "sleep",
+                text: "During the past month, how would you rate your sleep quality overall?"
+            },
+            {
+                id: "sleep_2",
+                category: "sleep",
+                text: "During the past month, how often have you had trouble staying asleep?"
+            },
+            {
+                id: "sleep_3",
+                category: "sleep",
+                text: "During the past month, how often have you taken medicine to help you sleep?"
+            },
+
+            // Social Anxiety
+            {
+                id: "social_1",
+                category: "social_anxiety",
+                text: "How often do you avoid social situations because you fear being embarrassed or judged?"
+            },
+            {
+                id: "social_2",
+                category: "social_anxiety",
+                text: "How often do you feel anxious when meeting new people?"
+            },
+            {
+                id: "social_3",
+                category: "social_anxiety",
+                text: "How often do you worry about social situations for days before they happen?"
+            },
+
+            // Panic Disorder
+            {
+                id: "panic_1",
+                category: "panic",
+                text: "In the past month, have you experienced sudden episodes of intense fear or panic?"
+            },
+            {
+                id: "panic_2",
+                category: "panic",
+                text: "During these episodes, did you experience physical symptoms like rapid heartbeat, sweating, or difficulty breathing?"
+            },
+            {
+                id: "panic_3",
+                category: "panic",
+                text: "How much do you worry about having another panic attack?"
+            },
+
+            // OCD Screening
+            {
+                id: "ocd_1",
+                category: "ocd",
+                text: "How often do you have unpleasant thoughts that won't leave your mind?"
+            },
+            {
+                id: "ocd_2",
+                category: "ocd",
+                text: "How often do you feel compelled to repeat certain behaviors or mental acts?"
+            },
+
+            // Bipolar Screening
+            {
+                id: "bipolar_1",
+                category: "bipolar",
+                text: "Have you ever had a period of time when you felt unusually energetic or 'high' for several days?"
+            },
+            {
+                id: "bipolar_2",
+                category: "bipolar",
+                text: "During these periods, did you need much less sleep than usual but still feel full of energy?"
+            },
+            {
+                id: "bipolar_3",
+                category: "bipolar",
+                text: "Have you experienced extreme mood swings from very high to very low?"
+            },
+
+            // Eating Disorders
+            {
+                id: "eating_1",
+                category: "eating",
+                text: "How often do you worry about your weight or body shape?"
+            },
+            {
+                id: "eating_2",
+                category: "eating",
+                text: "How often do you restrict your food intake or follow strict dieting rules?"
+            },
+            {
+                id: "eating_3",
+                category: "eating",
+                text: "How often do you feel guilty after eating?"
+            },
+
+            // Substance Use
+            {
+                id: "substance_1",
+                category: "substance",
+                text: "How often do you use alcohol or drugs to cope with stress or negative emotions?"
+            },
+            {
+                id: "substance_2",
+                category: "substance",
+                text: "How often has your use of alcohol or drugs interfered with your work, school, or relationships?"
+            },
+
+            // Relationships
+            {
+                id: "relationships_1",
+                category: "relationships",
+                text: "How satisfied are you with your current close relationships?"
+            },
+            {
+                id: "relationships_2",
+                category: "relationships",
+                text: "How often do you feel lonely or isolated from others?"
+            },
+            {
+                id: "relationships_3",
+                category: "relationships",
+                text: "How often do you have conflicts in your important relationships?"
+            },
+
+            // Self-esteem
+            {
+                id: "self_esteem_1",
+                category: "self_esteem",
+                text: "How often do you feel good about yourself and your accomplishments?"
+            },
+            {
+                id: "self_esteem_2",
+                category: "self_esteem",
+                text: "How often do you compare yourself unfavorably to others?"
+            },
+            {
+                id: "self_esteem_3",
+                category: "self_esteem",
+                text: "How confident do you feel in your abilities to handle life's challenges?"
+            },
+
+            // Work/Academic Stress
+            {
+                id: "work_1",
+                category: "work_stress",
+                text: "How often do you feel overwhelmed by work or academic responsibilities?"
+            },
+            {
+                id: "work_2",
+                category: "work_stress",
+                text: "How often do you feel burned out from work or studies?"
+            },
+            {
+                id: "work_3",
+                category: "work_stress",
+                text: "How often does work or academic stress affect your personal relationships?"
+            },
+
+            // Cultural Issues (Nepal-specific)
+            {
+                id: "cultural_1",
+                category: "cultural",
+                text: "How often do you feel torn between traditional Nepali values and modern lifestyle choices?"
+            },
+            {
+                id: "cultural_2",
+                category: "cultural",
+                text: "How often do you feel pressure from family or society regarding major life decisions?"
+            },
+            {
+                id: "cultural_3",
+                category: "cultural",
+                text: "How often do you feel misunderstood due to cultural or generational differences?"
+            }
+        ];
+
+        // Response Options
+        const responseOptions = [
+            { value: 0, label: "Not at all" },
+            { value: 1, label: "Several days" },
+            { value: 2, label: "More than half the days" },
+            { value: 3, label: "Nearly every day" }
+        ];
+
+        // Enhanced Therapist Database with Male Therapists
+        const therapistDatabase = [
+            {
+                id: 1,
+                name: "Dr. Sita Sharma",
+                specialties: ["Depression", "Anxiety", "Cultural Issues", "Women's Mental Health"],
+                gender: "female",
+                languages: ["Nepali", "English", "Hindi"],
+                experience: "8 years",
+                rating: 4.9,
+                reviews: 127,
+                location: "Kathmandu",
+                price: "NPR 2,500",
+                initials: "SS",
+                education: "PhD Clinical Psychology, Tribhuvan University",
+                approach: "Cognitive Behavioral Therapy, Mindfulness-based interventions"
+            },
+            {
+                id: 2,
+                name: "Dr. Rajesh Thapa",
+                specialties: ["Stress Management", "Relationship Issues", "Trauma", "PTSD"],
+                gender: "male",
+                languages: ["Nepali", "English"],
+                experience: "12 years",
+                rating: 4.8,
+                reviews: 203,
+                location: "Pokhara",
+                price: "NPR 3,000",
+                initials: "RT",
+                education: "MD Psychiatry, Institute of Medicine",
+                approach: "EMDR, Trauma-focused CBT"
+            },
+            {
+                id: 3,
+                name: "Dr. Kamala Gurung",
+                specialties: ["Family Therapy", "LGBTQ+ Issues", "Self-esteem", "Adolescent Counseling"],
+                gender: "female",
+                languages: ["Nepali", "English"],
+                experience: "6 years",
+                rating: 4.7,
+                reviews: 89,
+                location: "Lalitpur",
+                price: "NPR 2,000",
+                initials: "KG",
+                education: "MA Clinical Psychology, Kathmandu University",
+                approach: "Humanistic therapy, Family systems therapy"
+            },
+            {
+                id: 4,
+                name: "Dr. Prakash Adhikari",
+                specialties: ["Bipolar Disorder", "OCD", "Panic Disorder", "Medication Management"],
+                gender: "male",
+                languages: ["Nepali", "English"],
+                experience: "15 years",
+                rating: 4.9,
+                reviews: 156,
+                location: "Kathmandu",
+                price: "NPR 3,500",
+                initials: "PA",
+                education: "MD Psychiatry, AIIMS New Delhi",
+                approach: "Psychopharmacology, CBT"
+            },
+            {
+                id: 5,
+                name: "Dr. Sunita Rai",
+                specialties: ["Eating Disorders", "Body Image", "Substance Abuse", "Group Therapy"],
+                gender: "female",
+                languages: ["Nepali", "English"],
+                experience: "10 years",
+                rating: 4.6,
+                reviews: 94,
+                location: "Chitwan",
+                price: "NPR 2,200",
+                initials: "SR",
+                education: "PhD Psychology, Jawaharlal Nehru University",
+                approach: "Dialectical Behavior Therapy, Group interventions"
+            },
+            {
+                id: 6,
+                name: "Dr. Binod Karki",
+                specialties: ["Work Stress", "Career Counseling", "Social Anxiety", "Men's Mental Health"],
+                gender: "male",
+                languages: ["Nepali", "English"],
+                experience: "7 years",
+                rating: 4.5,
+                reviews: 72,
+                location: "Bhaktapur",
+                price: "NPR 2,800",
+                initials: "BK",
+                education: "MA Counseling Psychology, Tribhuvan University",
+                approach: "Solution-focused therapy, Career counseling"
+            },
+            {
+                id: 7,
+                name: "Dr. Arjun Poudel",
+                specialties: ["Depression", "Anxiety", "Anger Management", "Couples Therapy"],
+                gender: "male",
+                languages: ["Nepali", "English"],
+                experience: "9 years",
+                rating: 4.7,
+                reviews: 118,
+                location: "Kathmandu",
+                price: "NPR 2,700",
+                initials: "AP",
+                education: "MA Clinical Psychology, Tribhuvan University",
+                approach: "Cognitive Behavioral Therapy, Emotionally Focused Therapy"
+            },
+            {
+                id: 8,
+                name: "Dr. Ramesh Shrestha",
+                specialties: ["Trauma", "PTSD", "Sleep Disorders", "Mindfulness"],
+                gender: "male",
+                languages: ["Nepali", "English"],
+                experience: "11 years",
+                rating: 4.8,
+                reviews: 142,
+                location: "Lalitpur",
+                price: "NPR 3,200",
+                initials: "RS",
+                education: "PhD Clinical Psychology, Delhi University",
+                approach: "Trauma-informed therapy, Mindfulness-based stress reduction"
+            }
+        ];
+
+        // Login Functions
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showSignupForm() {
+            // In a real application, this would show a signup form
+            alert('Signup functionality would be implemented here. For demo purposes, you can use any email/password to login.');
+        }
+
+        // Handle login form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const loginButton = document.getElementById('login-button');
+                const originalText = loginButton.innerHTML;
+                
+                // Show loading state
+                loginButton.innerHTML = '<span class="loading"></span> Signing in...';
+                loginButton.disabled = true;
+                
+                // Simulate login process
+                setTimeout(() => {
+                    isLoggedIn = true;
+                    closeLoginModal();
+                    startAssessment();
+                    
+                    // Reset button
+                    loginButton.innerHTML = originalText;
+                    loginButton.disabled = false;
+                }, 1500);
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('login-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeLoginModal();
+                }
+            });
+        });
+
+        function startAssessment() {
+            if (!isLoggedIn) {
+                openLoginModal();
+                return;
+            }
+            
+            document.getElementById('hero-section').style.display = 'none';
+            document.getElementById('assessment-container').style.display = 'block';
+            renderCurrentStep();
+        }
+
+        function renderCurrentStep() {
+            updateProgressBar();
+            assessmentSteps[currentStep].render();
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentStep + 1) / assessmentSteps.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('step-indicator').textContent = `Step ${currentStep + 1} of ${assessmentSteps.length}`;
+            document.getElementById('progress-percentage').textContent = `${Math.round(progress)}% Complete`;
+        }
+
+        // Step 1: Personal Information
+        function renderPersonalInfoStep() {
+            const content = `
+                <h2 class="step-title">${assessmentSteps[0].title}</h2>
+                <p class="step-description">${assessmentSteps[0].description}</p>
+                
+                <form id="personal-info-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Age Range *</label>
+                            <select class="form-select" name="age" required>
+                                <option value="">Select your age range</option>
+                                <option value="18-25">18-25 years</option>
+                                <option value="26-35">26-35 years</option>
+                                <option value="36-45">36-45 years</option>
+                                <option value="46-55">46-55 years</option>
+                                <option value="56-65">56-65 years</option>
+                                <option value="65+">65+ years</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Gender Identity *</label>
+                            <select class="form-select" name="gender" required>
+                                <option value="">Select your gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="non-binary">Non-binary</option>
+                                <option value="transgender">Transgender</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Sexual Orientation</label>
+                            <select class="form-select" name="sexuality">
+                                <option value="">Select orientation (optional)</option>
+                                <option value="heterosexual">Heterosexual</option>
+                                <option value="homosexual">Homosexual</option>
+                                <option value="bisexual">Bisexual</option>
+                                <option value="pansexual">Pansexual</option>
+                                <option value="asexual">Asexual</option>
+                                <option value="questioning">Questioning</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Location in Nepal *</label>
+                            <select class="form-select" name="location" required>
+                                <option value="">Select your location</option>
+                                <option value="kathmandu">Kathmandu</option>
+                                <option value="pokhara">Pokhara</option>
+                                <option value="chitwan">Chitwan</option>
+                                <option value="lalitpur">Lalitpur</option>
+                                <option value="bhaktapur">Bhaktapur</option>
+                                <option value="biratnagar">Biratnagar</option>
+                                <option value="birgunj">Birgunj</option>
+                                <option value="dharan">Dharan</option>
+                                <option value="butwal">Butwal</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Preferred Language for Therapy *</label>
+                            <select class="form-select" name="language" required>
+                                <option value="">Select language preference</option>
+                                <option value="nepali">Nepali only</option>
+                                <option value="english">English only</option>
+                                <option value="both">Both Nepali and English</option>
+                                <option value="hindi">Hindi</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Education Level</label>
+                            <select class="form-select" name="education">
+                                <option value="">Select education level (optional)</option>
+                                <option value="high-school">High School</option>
+                                <option value="undergraduate">Undergraduate</option>
+                                <option value="graduate">Graduate</option>
+                                <option value="postgraduate">Postgraduate</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div></div>
+                        <button type="submit" class="btn btn-primary">
+                            Continue to Assessment
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            document.getElementById('step-content').innerHTML = content;
+            
+            document.getElementById('personal-info-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (isSubmitting) return;
+                
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData);
+                assessmentData = { ...assessmentData, personalInfo: data };
+                nextStep();
+            });
+        }
+
+        // Step 2: Mental Health Assessment
+        function renderMentalHealthStep() {
+            let questionsHtml = '';
+            
+            mentalHealthQuestions.forEach((question, index) => {
+                let optionsHtml = '';
+                responseOptions.forEach(option => {
+                    optionsHtml += `
+                        <div class="option-card" onclick="selectOption('${question.id}', ${option.value}, this)">
+                            <input type="radio" name="${question.id}" value="${option.value}" class="option-radio" required>
+                            <span class="option-text">${option.label}</span>
+                        </div>
+                    `;
+                });
+                
+                questionsHtml += `
+                    <div class="question-container">
+                        <div class="question-number">${index + 1}</div>
+                        <div class="question-text">${question.text}</div>
+                        <div class="options-grid">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            const content = `
+                <h2 class="step-title">${assessmentSteps[1].title}</h2>
+                <p class="step-description">${assessmentSteps[1].description}</p>
+                
+                <form id="mental-health-form">
+                    ${questionsHtml}
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="previousStep()">
+                            ← Back
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Continue to Preferences
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            document.getElementById('step-content').innerHTML = content;
+            
+            document.getElementById('mental-health-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (isSubmitting) return;
+                
+                const formData = new FormData(e.target);
+                const mentalHealthResponses = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    mentalHealthResponses[key] = parseInt(value);
+                }
+                
+                assessmentData.mentalHealthResponses = mentalHealthResponses;
+                nextStep();
+            });
+        }
+
+        // Step 3: Therapy Preferences
+        function renderPreferencesStep() {
+            const concerns = [
+                "Depression", "Anxiety", "Stress Management", "Relationship Issues",
+                "Family Problems", "Work-related Stress", "Trauma/PTSD", "Grief and Loss",
+                "Self-esteem Issues", "Cultural Identity", "LGBTQ+ Issues", "Substance Use",
+                "Eating Disorders", "Sleep Problems", "Social Anxiety", "Panic Attacks",
+                "OCD", "Bipolar Disorder", "Career Counseling", "Academic Stress"
+            ];
+            
+            let concernsHtml = '';
+            concerns.forEach(concern => {
+                concernsHtml += `
+                    <div class="checkbox-card" onclick="toggleCheckbox('${concern}', this)">
+                        <input type="checkbox" name="specificConcerns" value="${concern}" class="checkbox-input">
+                        <span>${concern}</span>
+                    </div>
+                `;
+            });
+            
+            const content = `
+                <h2 class="step-title">${assessmentSteps[2].title}</h2>
+                <p class="step-description">${assessmentSteps[2].description}</p>
+                
+                <form id="preferences-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Preferred Therapist Gender</label>
+                            <select class="form-select" name="therapistGender">
+                                <option value="">No preference</option>
+                                <option value="male">Male therapist</option>
+                                <option value="female">Female therapist</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Preferred Therapy Type *</label>
+                            <select class="form-select" name="therapyType" required>
+                                <option value="">Select therapy type</option>
+                                <option value="individual">Individual Therapy</option>
+                                <option value="couples">Couples Therapy</option>
+                                <option value="family">Family Therapy</option>
+                                <option value="group">Group Therapy</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Session Frequency *</label>
+                            <select class="form-select" name="sessionFrequency" required>
+                                <option value="">Select frequency</option>
+                                <option value="weekly">Weekly sessions</option>
+                                <option value="biweekly">Bi-weekly sessions</option>
+                                <option value="monthly">Monthly sessions</option>
+                                <option value="as-needed">As needed basis</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Previous Therapy Experience</label>
+                            <select class="form-select" name="previousTherapy">
+                                <option value="">Select experience</option>
+                                <option value="yes-helpful">Yes, and it was helpful</option>
+                                <option value="yes-not-helpful">Yes, but it wasn't helpful</option>
+                                <option value="yes-mixed">Yes, with mixed results</option>
+                                <option value="no">No, this is my first time</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Areas you'd like to focus on (Select all that apply)</label>
+                        <div class="checkbox-grid">
+                            ${concernsHtml}
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="previousStep()">
+                            ← Back
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Continue to Final Step
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            document.getElementById('step-content').innerHTML = content;
+            
+            document.getElementById('preferences-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (isSubmitting) return;
+                
+                const formData = new FormData(e.target);
+                const preferences = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    if (key === 'specificConcerns') {
+                        if (!preferences.specificConcerns) {
+                            preferences.specificConcerns = [];
+                        }
+                        preferences.specificConcerns.push(value);
+                    } else {
+                        preferences[key] = value;
+                    }
+                }
+                
+                assessmentData.preferences = preferences;
+                nextStep();
+            });
+        }
+
+        // Step 4: Additional Information
+        function renderAdditionalStep() {
+            const content = `
+                <h2 class="step-title">${assessmentSteps[3].title}</h2>
+                <p class="step-description">${assessmentSteps[3].description}</p>
+                
+                <form id="additional-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">How urgent is your need for therapy? *</label>
+                            <select class="form-select" name="urgency" required>
+                                <option value="">Select urgency level</option>
+                                <option value="immediate">I need help immediately</option>
+                                <option value="within-week">Within a week</option>
+                                <option value="within-month">Within a month</option>
+                                <option value="flexible">I'm flexible with timing</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Budget per session (NPR) *</label>
+                            <select class="form-select" name="budget" required>
+                                <option value="">Select budget range</option>
+                                <option value="1000-2000">NPR 1,000 - 2,000</option>
+                                <option value="2000-3000">NPR 2,000 - 3,000</option>
+                                <option value="3000-4000">NPR 3,000 - 4,000</option>
+                                <option value="4000+">NPR 4,000+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Preferred Session Format</label>
+                            <select class="form-select" name="sessionFormat">
+                                <option value="">Select format preference</option>
+                                <option value="in-person">In-person only</option>
+                                <option value="online">Online only</option>
+                                <option value="both">Both in-person and online</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Preferred Time of Day</label>
+                            <select class="form-select" name="timePreference">
+                                <option value="">Select time preference</option>
+                                <option value="morning">Morning (8 AM - 12 PM)</option>
+                                <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                                <option value="evening">Evening (5 PM - 8 PM)</option>
+                                <option value="flexible">Flexible</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Additional Information</label>
+                        <textarea class="form-textarea" name="additionalNotes" placeholder="Is there anything else you'd like your therapist to know about you, your situation, or your therapy goals? (Optional)"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="previousStep()">
+                            ← Back
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            Get My Results
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            document.getElementById('step-content').innerHTML = content;
+            
+            document.getElementById('additional-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (isSubmitting) return;
+                
+                isSubmitting = true;
+                const submitBtn = document.getElementById('submit-btn');
+                submitBtn.innerHTML = '<span class="loading"></span> Processing...';
+                submitBtn.disabled = true;
+                
+                const formData = new FormData(e.target);
+                const additionalInfo = Object.fromEntries(formData);
+                assessmentData.additionalInfo = additionalInfo;
+                
+                // Simulate processing time
+                setTimeout(() => {
+                    showResults();
+                    isSubmitting = false;
+                }, 2000);
+            });
+        }
+
+        // Helper Functions
+        function selectOption(questionId, value, element) {
+            // Remove selected class from siblings
+            const siblings = element.parentNode.querySelectorAll('.option-card');
+            siblings.forEach(sibling => sibling.classList.remove('selected'));
+            
+            // Add selected class to clicked element
+            element.classList.add('selected');
+            
+            // Check the radio button
+            const radio = element.querySelector('input[type="radio"]');
+            radio.checked = true;
+        }
+
+        function toggleCheckbox(value, element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                element.classList.add('selected');
+            } else {
+                element.classList.remove('selected');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < assessmentSteps.length - 1) {
+                currentStep++;
+                renderCurrentStep();
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                renderCurrentStep();
+            }
+        }
+
+        // Assessment Scoring and Analysis
+        function calculateComprehensiveScores() {
+            const responses = assessmentData.mentalHealthResponses || {};
+            
+            // Calculate category scores
+            const categoryScores = {
+                depression: {
+                    score: (responses.depression_1 || 0) + (responses.depression_2 || 0) + 
+                           (responses.depression_3 || 0) + (responses.depression_4 || 0) + 
+                           (responses.depression_5 || 0) + (responses.depression_6 || 0) + 
+                           (responses.depression_7 || 0) + (responses.depression_8 || 0) + 
+                           (responses.depression_9 || 0),
+                    max: 27,
+                    label: "Depression",
+                    color: "#3b82f6"
+                },
+                anxiety: {
+                    score: (responses.anxiety_1 || 0) + (responses.anxiety_2 || 0) + 
+                           (responses.anxiety_3 || 0) + (responses.anxiety_4 || 0) + 
+                           (responses.anxiety_5 || 0) + (responses.anxiety_6 || 0) + 
+                           (responses.anxiety_7 || 0),
+                    max: 21,
+                    label: "Anxiety",
+                    color: "#8b5cf6"
+                },
+                stress: {
+                    score: (responses.stress_1 || 0) + (responses.stress_2 || 0) + 
+                           (responses.stress_3 || 0) + (responses.stress_4 || 0),
+                    max: 12,
+                    label: "Stress",
+                    color: "#f59e0b"
+                },
+                trauma: {
+                    score: (responses.trauma_1 || 0) + (responses.trauma_2 || 0) + 
+                           (responses.trauma_3 || 0) + (responses.trauma_4 || 0),
+                    max: 12,
+                    label: "Trauma/PTSD",
+                    color: "#ef4444"
+                },
+                sleep: {
+                    score: (responses.sleep_1 || 0) + (responses.sleep_2 || 0) + (responses.sleep_3 || 0),
+                    max: 9,
+                    label: "Sleep Issues",
+                    color: "#10b981"
+                },
+                social_anxiety: {
+                    score: (responses.social_1 || 0) + (responses.social_2 || 0) + (responses.social_3 || 0),
+                    max: 9,
+                    label: "Social Anxiety",
+                    color: "#06b6d4"
+                },
+                panic: {
+                    score: (responses.panic_1 || 0) + (responses.panic_2 || 0) + (responses.panic_3 || 0),
+                    max: 9,
+                    label: "Panic Disorder",
+                    color: "#84cc16"
+                },
+                ocd: {
+                    score: (responses.ocd_1 || 0) + (responses.ocd_2 || 0),
+                    max: 6,
+                    label: "OCD",
+                    color: "#a855f7"
+                },
+                bipolar: {
+                    score: (responses.bipolar_1 || 0) + (responses.bipolar_2 || 0) + (responses.bipolar_3 || 0),
+                    max: 9,
+                    label: "Bipolar",
+                    color: "#f97316"
+                },
+                eating: {
+                    score: (responses.eating_1 || 0) + (responses.eating_2 || 0) + (responses.eating_3 || 0),
+                    max: 9,
+                    label: "Eating Concerns",
+                    color: "#ec4899"
+                },
+                substance: {
+                    score: (responses.substance_1 || 0) + (responses.substance_2 || 0),
+                    max: 6,
+                    label: "Substance Use",
+                    color: "#6366f1"
+                },
+                relationships: {
+                    score: (responses.relationships_1 || 0) + (responses.relationships_2 || 0) + (responses.relationships_3 || 0),
+                    max: 9,
+                    label: "Relationship Issues",
+                    color: "#14b8a6"
+                },
+                self_esteem: {
+                    score: (responses.self_esteem_1 || 0) + (responses.self_esteem_2 || 0) + (responses.self_esteem_3 || 0),
+                    max: 9,
+                    label: "Self-esteem",
+                    color: "#f59e0b"
+                },
+                work_stress: {
+                    score: (responses.work_1 || 0) + (responses.work_2 || 0) + (responses.work_3 || 0),
+                    max: 9,
+                    label: "Work Stress",
+                    color: "#8b5cf6"
+                },
+                cultural: {
+                    score: (responses.cultural_1 || 0) + (responses.cultural_2 || 0) + (responses.cultural_3 || 0),
+                    max: 9,
+                    label: "Cultural Issues",
+                    color: "#06b6d4"
+                }
+            };
+
+            // Calculate total score and severity
+            const totalScore = Object.values(categoryScores).reduce((sum, category) => sum + category.score, 0);
+            const maxTotalScore = Object.values(categoryScores).reduce((sum, category) => sum + category.max, 0);
+            
+            let severity = "Mild";
+            let severityColor = "var(--success-color)";
+            
+            const severityPercentage = (totalScore / maxTotalScore) * 100;
+            
+            if (severityPercentage > 60) {
+                severity = "Severe";
+                severityColor = "var(--danger-color)";
+            } else if (severityPercentage > 35) {
+                severity = "Moderate";
+                severityColor = "var(--warning-color)";
+            }
+
+            // Find top 3 concerns
+            const topConcerns = Object.entries(categoryScores)
+                .map(([key, data]) => ({
+                    key,
+                    ...data,
+                    percentage: Math.round((data.score / data.max) * 100)
+                }))
+                .sort((a, b) => b.percentage - a.percentage)
+                .slice(0, 3);
+
+            return {
+                categoryScores,
+                totalScore,
+                maxTotalScore,
+                severity,
+                severityColor,
+                severityPercentage: Math.round(severityPercentage),
+                topConcerns
+            };
+        }
+
+        function getMatchedTherapists() {
+            const personalInfo = assessmentData.personalInfo || {};
+            const preferences = assessmentData.preferences || {};
+            const additionalInfo = assessmentData.additionalInfo || {};
+            const scores = calculateComprehensiveScores();
+
+            // Filter therapists based on preferences
+            let filteredTherapists = therapistDatabase.filter(therapist => {
+                // Gender preference
+                if (preferences.therapistGender && preferences.therapistGender !== therapist.gender) {
+                    return false;
+                }
+
+                // Language preference
+                if (personalInfo.language) {
+                    const preferredLang = personalInfo.language;
+                    if (preferredLang === 'nepali' && !therapist.languages.includes('Nepali')) return false;
+                    if (preferredLang === 'english' && !therapist.languages.includes('English')) return false;
+                    if (preferredLang === 'both' && (!therapist.languages.includes('Nepali') || !therapist.languages.includes('English'))) return false;
+                }
+
+                // Budget filter
+                if (additionalInfo.budget) {
+                    const therapistPrice = parseInt(therapist.price.replace(/[^\d]/g, ''));
+                    const budgetRange = additionalInfo.budget;
+                    
+                    if (budgetRange === '1000-2000' && therapistPrice > 2000) return false;
+                    if (budgetRange === '2000-3000' && (therapistPrice < 2000 || therapistPrice > 3000)) return false;
+                    if (budgetRange === '3000-4000' && (therapistPrice < 3000 || therapistPrice > 4000)) return false;
+                }
+
+                return true;
+            });
+
+            // Score therapists based on specialty match
+            filteredTherapists = filteredTherapists.map(therapist => {
+                let matchScore = 0;
+                const userConcerns = preferences.specificConcerns || [];
+                const topConcernLabels = scores.topConcerns.map(c => c.label);
+
+                // Check specialty matches
+                therapist.specialties.forEach(specialty => {
+                    if (userConcerns.includes(specialty)) matchScore += 3;
+                    if (topConcernLabels.includes(specialty)) matchScore += 2;
+                });
+
+                return { ...therapist, matchScore };
+            });
+
+            // Sort by match score and rating
+            filteredTherapists.sort((a, b) => {
+                if (a.matchScore !== b.matchScore) {
+                    return b.matchScore - a.matchScore;
+                }
+                return b.rating - a.rating;
+            });
+
+            return filteredTherapists.slice(0, 4); // Return top 4 matches
+        }
+
+        function showResults() {
+            document.getElementById('assessment-container').style.display = 'none';
+            document.getElementById('results-container').style.display = 'block';
+            
+            const scores = calculateComprehensiveScores();
+            const recommendedTherapists = getMatchedTherapists();
+            
+            renderScoreCards(scores);
+            renderSeverityAssessment(scores);
+            renderTopConcerns(scores);
+            renderRecommendedTherapists(recommendedTherapists);
+        }
+
+        function renderScoreCards(scores) {
+            const scoresHtml = Object.entries(scores.categoryScores).map(([key, category]) => `
+                <div class="score-card">
+                    <div class="score-value" style="color: ${category.color};">
+                        ${category.score}/${category.max}
+                    </div>
+                    <div class="score-label">${category.label}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('scores-grid').innerHTML = scoresHtml;
+        }
+
+        function renderSeverityAssessment(scores) {
+            let severityMessage = "";
+            
+            if (scores.severity === "Mild") {
+                severityMessage = "Your assessment indicates mild symptoms. Therapy can help you develop coping strategies and maintain good mental health.";
+            } else if (scores.severity === "Moderate") {
+                severityMessage = "Your assessment indicates moderate symptoms. We recommend seeking professional therapy to help manage your symptoms and improve your well-being.";
+            } else {
+                severityMessage = "Your assessment indicates severe symptoms. We strongly recommend seeking professional help as soon as possible. Please consider reaching out to a mental health professional immediately.";
+            }
+            
+            const severityHtml = `
+                <div class="severity-title">
+                    Overall Assessment: 
+                    <span style="color: ${scores.severityColor};">${scores.severity}</span>
+                    <span style="color: var(--text-secondary); font-size: 1rem; font-weight: 500;">
+                        (${scores.severityPercentage}% severity level)
+                    </span>
+                </div>
+                <p class="severity-description">${severityMessage}</p>
+            `;
+            
+            document.getElementById('severity-card').innerHTML = severityHtml;
+        }
+
+        function renderTopConcerns(scores) {
+            const concernsHtml = scores.topConcerns.map((concern, index) => `
+                <div class="concern-item">
+                    <div class="concern-rank">${index + 1}</div>
+                    <div class="concern-label">${concern.label}</div>
+                    <div class="concern-percentage">${concern.percentage}% severity</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('concerns-grid').innerHTML = concernsHtml;
+        }
+
+        function renderRecommendedTherapists(therapists) {
+            const therapistsHtml = therapists.map(therapist => {
+                const specialtiesHtml = therapist.specialties.map(specialty => 
+                    `<span class="specialty-tag">${specialty}</span>`
+                ).join('');
+                
+                return `
+                    <div class="therapist-card">
+                        <div class="therapist-header">
+                            <div class="therapist-avatar">${therapist.initials}</div>
+                            <div class="therapist-info">
+                                <h3>${therapist.name}</h3>
+                                <div class="therapist-rating">
+                                    ⭐ ${therapist.rating} • ${therapist.reviews} reviews • ${therapist.experience}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="specialties-container">
+                            <div class="specialties-grid">
+                                ${specialtiesHtml}
+                            </div>
+                        </div>
+                        
+                        <div class="therapist-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Languages:</span>
+                                <span class="detail-value">${therapist.languages.join(', ')}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">${therapist.location}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Education:</span>
+                                <span class="detail-value">${therapist.education}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Approach:</span>
+                                <span class="detail-value">${therapist.approach}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="therapist-price">${therapist.price}/session</div>
+                        
+                        <button class="book-button" onclick="bookConsultation('${therapist.name}', ${therapist.id})">
+                            Book Consultation
+                        </button>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('therapists-grid').innerHTML = therapistsHtml;
+        }
+
+        function bookConsultation(therapistName, therapistId) {
+            // In a real application, this would redirect to a booking system
+            alert(`Booking consultation with ${therapistName}.\n\nIn a real application, this would:\n• Redirect to a secure booking system\n• Show available time slots\n• Process payment\n• Send confirmation emails\n• Set up calendar reminders`);
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
